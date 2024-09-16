@@ -1,19 +1,36 @@
 import { useState } from 'react';
-import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
   const [students, setStudents] = useState([
-    {id: 1, name: "Noah1", age: 18},
-    {id: 2, name: "Noah2", age: 18},
-    {id: 3, name: "Noah3", age: 18},
-    {id: 4, name: "Noah4", age: 18},
-    {id: 5, name: "Noah5", age: 18},
-    {id: 6, name: "Noah6", age: 18},
+    { id: 1, name: "Noah1", age: 18 },
+    { id: 2, name: "Noah2", age: 18 },
+    { id: 3, name: "Noah3", age: 18 },
+    { id: 4, name: "Noah4", age: 18 },
+    { id: 5, name: "Noah5", age: 18 },
+    { id: 6, name: "Noah6", age: 18 },
   ])
   return (
     <View style={styles.container}>
-        <Text style={{fontSize: 60}}>Hello world </Text>
-        <ScrollView>
+      <Text style={{ fontSize: 60 }}>Hello world </Text>
+      <FlatList
+        data={students}
+        numColumns={2}
+        keyExtractor={item => item.id + ""}
+        renderItem={({ item }) => {
+          return (
+            <View style={{
+              padding: 30,
+              backgroundColor: "pink",
+              marginBottom: 30,
+              marginHorizontal: 30
+            }}>
+              <Text>{item.name}</Text>
+            </View>
+          )
+        }}
+      />
+      {/* <ScrollView>
           {students.map(item => {
             return (
               <View key={item.id} style={{
@@ -25,7 +42,7 @@ export default function App() {
               </View>
             )
           })}
-        </ScrollView>
+        </ScrollView> */}
     </View>
 
   );
