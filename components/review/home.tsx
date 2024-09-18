@@ -1,10 +1,11 @@
 import { View, Text, Button } from "react-native"
-const HomeScreen = () => {
+const HomeScreen = (props: any) => {
+    const {navigation} = props;
     return (
         <View>
             <Text>Home screen</Text>
             <Button title="View Detail"
-            onPress={()=> alert("me")}/>
+            onPress={()=> navigation.navigate("review-detail")}/>
         </View>
 
     )
