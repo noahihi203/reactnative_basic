@@ -6,12 +6,13 @@ import DetailScreen from "./components/review/detail";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { OPENSANS_RENGULAR } from "./utils/const";
 
 SplashScreen.preventAutoHideAsync();
 
 const App = () => {
     const [loaded, error] = useFonts({
-        'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf'),
+        [OPENSANS_RENGULAR]: require('./assets/fonts/OpenSans-Regular.ttf'),
     });
     useEffect(() => {
         if (loaded || error) {
