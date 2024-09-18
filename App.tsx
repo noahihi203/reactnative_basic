@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 interface ITodo {
   id: number,
@@ -10,13 +10,21 @@ export default function App() {
   const [todo, setTodo] = useState("");
   const [listTodo, setListTodo] = useState<ITodo[]>([])
   const handleAddTodo = () => {
-    if(!todo) return;
+    if (!todo) {
+      alert("empty todo")
+      return;
+    }
     setListTodo([...listTodo,
     {
       id: randomInterger(2, 200000),
       name: todo
     }])
     setTodo("")
+  }
+
+  const deleteTodo = (id: number) => {
+    const newTodo = listTodo.filter(item => item.id !== id);
+    setListTodo(newTodo)
   }
 
   function randomInterger(min: number, max: number) {
@@ -44,12 +52,19 @@ export default function App() {
           keyExtractor={item => item.id + ""}
           renderItem={({ item }) => {
             return (
-              <Text style={styles.todoItem}>{item.name}</Text>
+              <Pressable
+                style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+                onPress={() => deleteTodo(item.id)}
+              >
+                <Text
+                  style={styles.todoItem}>{item.name}
+                </Text>
+              </Pressable>
             )
           }}
         />
       </View>
-    </View>
+    </View >
 
   );
 }
